@@ -1,0 +1,59 @@
+.login-container {
+    margin: 50% auto;
+    -webkit-box-shadow: 13px 13px 29px -8px rgba(0, 0, 0, 0.64);
+    -moz-box-shadow: 13px 13px 29px -8px rgba(0, 0, 0, 0.64);
+    box-shadow: 13px 13px 29px -8px rgba(0, 0, 0, 0.64);
+}
+
+.login-container form {
+    display: grid;
+    padding: 14px;
+    border: 1px solid rgb(184, 184, 184);
+    border-radius: 5px;
+    background-color: #ededed;
+}
+
+.login-container input {
+    background-color: white;
+    color: black;
+    border-color: #cacaca;
+    border: 2px solid rgb(187, 187, 187);
+    border-radius: 4px;
+    display: grid;
+    padding: 5px;
+    width: 17em;
+    margin: 5px 2px;
+    box-sizing: border-box;
+    border-bottom: none !important;
+    outline: none;
+}
+
+.login-container label {
+    display: flex;
+}
+
+.loginSingUp-login span {
+    color: tomato;
+    cursor: pointer;
+}
+
+.cont-login {
+    border: 1px solid black;
+    padding: 20px;
+}
+
+.login-container h2 {
+   text-align: center;
+   color: tomato;
+}
+
+input::placeholder {
+    color: rgb(225, 225, 225);
+}
+
+.bl {
+    color: tomato;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 10px;
+}

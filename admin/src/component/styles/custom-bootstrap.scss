@@ -1,0 +1,28 @@
+// Define custom theme colors
+$theme-colors: (
+  "primary": #0d6efd,
+  "secondary": #6c757d,
+  "success": #198754,
+  "danger": #dc3545,
+  "warning": #ffc107,
+  "info": #0dcaf0,
+  "light": #f8f9fa,
+  "dark": #212529,
+  "tomato":tomato,
+  "d":rgb(15, 110, 66),
+);
+
+$theme-fonts: (
+"monospace": "Courier New, monospace",
+"heading": "Poppins, sans-serif",
+);
+
+$theme-border: (
+"border-bottom":"4px solid black",
+);
+
+
+// Optional: Customize other variables if needed
+
+// Import Bootstrap
+@import "bootstrap/scss/bootstrap";

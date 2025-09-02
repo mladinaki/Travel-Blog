@@ -1,0 +1,7 @@
+.app-content {
+    width:85% ;
+    display:flexbox;
+    position: relative;
+    float: right;
+    color: rgb(113, 113, 113);
+}

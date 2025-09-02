@@ -1,0 +1,80 @@
+
+body {
+  font-family: 'MyCustomFont', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+/*Основен стил за Sidebar */
+.sidebar-container {
+  display: flex;
+}
+
+.sidebar {
+  width: 250px;
+  min-height: 100vh;
+  background-color: #343a40;
+  transition: width 0.3s ease-in-out;
+  padding: 10px;
+}
+
+.sidebar.collapsed {
+  width: 80px;
+}
+
+/*Стил на бутона "Start Menu" */
+.toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Активен елемент в навигацията */
+.nav-item .active {
+  background-color: tomato;
+  color: white;
+  border-left: 4px solid orange;
+  padding-left: 12px;
+}
+
+.sidebar-menu{
+  font-size: 25px;
+}
+/*ОПТИМИЗАЦИЯ ЗА МОБИЛНИ */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 80px;
+  }
+
+  .toggle-btn span {
+    display: none;
+  }
+
+  .nav-menu .nav-link span {
+    display: none;
+  }
+
+  .nav-link {
+    justify-content: center;
+  }
+
+  .nav-link i {
+    font-size: 24px;
+  }
+
+  .cont-dropdown {
+    display: flex;
+    justify-content: center;
+  }
+
+  .cont-dropdown span {
+    display: none;
+  }
+
+  .cont-dropdown .dropdown-toggle {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+}

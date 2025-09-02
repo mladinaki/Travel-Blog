@@ -1,0 +1,140 @@
+.form_hoa {
+    /* width: 50%; */
+    margin: 2% auto;
+    width: 70%;
+    border-radius: 20px;
+    display: block;
+    border: 1px solid rgb(216, 216, 216);
+    background-color: #ededed;
+    -webkit-box-shadow: 13px 10px 20px -10px rgba(0, 0, 0, 0.64);
+    -moz-box-shadow: 13px 10px 20px -10px rgba(0, 0, 0, 0.64);
+    box-shadow: 13px 10px 20px -10px rgba(0, 0, 0, 0.64);
+    display: grid;
+    overflow-y: auto;
+    height: 90vh;
+}
+
+.form_hoa>.box_login {
+    padding: 30px;
+}
+
+
+.box_login form label {
+    padding: 1px 0;
+    display: block;
+    font-weight: 550;
+    font-size: 14px;
+}
+
+.box_login input:focus {
+    border-color: #d9d9d9;
+    outline: none;
+    box-shadow: 0 0 1px rgba(205, 205, 205, 0.5);
+    box-shadow: 7px 7px 5px -6px rgba(0, 0, 0, 0.57) inset;
+    -webkit-box-shadow: 7px 7px 5px -6px rgba(0, 0, 0, 0.57) inset;
+    -moz-box-shadow: 7px 7px 5px -6px rgba(0, 0, 0, 0.57) inset;
+}
+
+.box_login textarea:focus {
+    border-color: #d9d9d9;
+    outline: none;
+    box-shadow: 0 0 2px rgba(0, 0, 255, 0.5);
+}
+
+
+.box_login form textarea {
+    border-top: 1px solid rgb(221, 221, 221) !important;
+    outline: none;
+    box-shadow: 0 0 2px rgba(0, 0, 255, 0.5);
+}
+
+
+.box_login form input {
+    /* width: 80%; */
+    border-top: 2px solid rgb(186, 186, 186) !important;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    outline: none;
+}
+
+.box_login form button {
+    border: none;
+    background: #333;
+    color: #fff;
+    padding: 8px;
+    font-size: 15px;
+    position: relative;
+    top: 10px;
+    /* margin: 5px 0; */
+}
+
+.custom-category option:hover {
+    border: 1px solid black;
+    color: black;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.image-upload {
+    width: 10%;
+}
+
+.upload-img img {
+    width: 60px;
+    height: 60px;
+
+    box-sizing: border-box;
+    display: inline;
+    /* font-size: 10px; */
+    margin: 0 5px 5px 0;
+    border: 1px solid #a2a2a2;
+}
+
+
+.textarea-placeholder-text::placeholder {
+    color: rgb(198, 198, 198);
+}
+
+.textarea-placeholder-text {
+    border-radius: 5px;
+    color: #626262;
+    font-size: 17px;
+}
+
+
+.form-text {
+    position: relative;
+    bottom: 20px;
+    left: 20px;
+}
+
+.btn-custom {
+    font-size: 5px;
+}
+
+.btn-custom:hover {
+    background-color: rgb(73, 73, 73);
+}
+
+.form-group-custom {
+    font-weight: normal;
+    font-size: 0.8rem;
+    margin: 5px 0;
+}
+
+label.form-group-custom {
+    color: tomato !important;
+
+}
+
+.form-group-custom input {
+    height: 40px;
+}
+
+.form-group-custom ::placeholder {
+    font-size: 13px;
+    opacity: 0.4;
+}

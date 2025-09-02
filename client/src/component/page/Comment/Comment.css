@@ -1,0 +1,18 @@
+.btn:hover {
+    background-color: #ededed;
+    color: rgb(0, 0, 0);
+    border: 1px solid rgb(63, 163, 210);
+
+}
+
+.btn {
+    color: rgb(135, 135, 135);
+    background-color: #f6f6f6;
+    text-transform: uppercase;
+    font-weight: bolder;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    width: 130px;
+    height: 35px;
+    border: 1px solid rgb(176, 176, 176);
+}

@@ -1,0 +1,106 @@
+/* Основен контейнер за страницата */
+.main-container {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Контейнер за съдържанието */
+.content-container {
+    background-color: rgb(243, 243, 243);
+    margin-left: 0px;
+    flex-grow: 1;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+/* Стилове за детайлната страница */
+.details-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Заглавие */
+.details-title {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* Главно изображение */
+.details-cover {
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.details-cover:hover {
+    transform: scale(1.05);
+}
+
+/* Разделител */
+.details-divider {
+    width: 100%;
+    margin: 20px 0;
+    border: 1px solid #ddd;
+}
+
+/* Галерия - Снимките една под друга */
+.details-gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Контейнер за всяка снимка */
+.details-item {
+    width: 100%;
+    max-width: 700px;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Изображения в галерията */
+.details-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.details-image:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+/* Описание под изображението */
+.details-description {
+    font-size: 1rem;
+    width: 100%;
+    margin-top: 8px;
+    color: #555;
+    text-align: left;
+}
+
+/* Анимация */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
