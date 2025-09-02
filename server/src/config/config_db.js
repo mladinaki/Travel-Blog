@@ -6,7 +6,6 @@ const sequelize = new Sequelize("db_blog_now", "root", "mladinaki123", {
     dialect: "mysql",
     logging: false
 });
-
 (async () => {
     try {
         await sequelize.authenticate();
