@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import MyContext from "../../context/Context";
 import './Comment.css';

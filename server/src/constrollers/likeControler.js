@@ -3,7 +3,7 @@ const CommentLike = require("../models/CommentLike");
 const likeController = async (req, res) => {
     const { comment_id } = req.params;
     const { post_id } = req.body;
-    const user_id = req.user.id;
+    const user_id = req.user?.id;
 
     try {
 
@@ -16,7 +16,7 @@ const likeController = async (req, res) => {
         }
 
         const [like, created] = await CommentLike.findOrCreate({
-            where: { user_id, comment_id },
+            where: { user_id, comment_id, post_id },
             defaults: { post_id }
 
         });

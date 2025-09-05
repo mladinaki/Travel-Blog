@@ -76,21 +76,30 @@ const Details = () => {
         }
     }, [comments, token]);
 
-    const toggleLike = async (commentId) => {
+    const toggleLike = (commentId) => {
         if (!token) {
             toast.info("Моля, влезте в профила си, за да харесате коментар.");
             return;
         }
-        try {
-            await axios.post(
-                `${url}/comment/like/${commentId}`,
-                { post_id: id },
-                { headers: { token } }
-            )
-            await fetchLikeComment();
-        } catch (error) {
-            toast.error("Грешка при харесване.");
-        }
+
+        setLikedData(prev => {
+            const current = prev[commentId];
+            if (!current) return prev;
+
+            const liked = !current.liked;
+            const count = liked ? current.count + 1 : current.count - 1;
+
+            return {
+                ...prev,
+                [commentId]: {
+                    liked,
+                    count
+                }
+            };
+        });
+
+        axios.post(`${url}/comment/like/${commentId}`, { post_id: id }, { headers: { token } })
+            .catch(() => toast.error("Грешка при харесване."));
     };
 
     const onDeleteComment = async (commentId) => {
@@ -242,12 +251,16 @@ const Details = () => {
                                             <span
                                                 onClick={() => toggleLike(comment.id)}
                                                 style={{
-                                                    color: likedData[comment.id]?.liked ? 'red' : 'green',
                                                     fontSize: '14px',
                                                     cursor: token ? 'pointer' : 'default'
                                                 }}
                                             >
-                                                <i className="bi bi-hand-thumbs-up me-1"></i> {likedData[comment.id]?.count || 0}
+                                                <i
+                                                    className={likedData[comment.id]?.liked ? "bi bi-hand-thumbs-up-fill" : "bi bi-hand-thumbs-up"}
+                                                    style={{ color: likedData[comment.id]?.liked ? 'red' : 'gre' }}
+                                                ></i>
+                                                {" "}
+                                                {likedData[comment.id]?.count || 0}
                                             </span>
                                         </div>
                                     </div>
@@ -263,7 +276,6 @@ const Details = () => {
                 </div>
             </div>
         </div>
-
     );
 };
 
