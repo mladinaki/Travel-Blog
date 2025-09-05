@@ -18,15 +18,15 @@ const NavigateBar = () => {
 
   return (
     <Navbar expand="lg" fixed="top" className="custom-navbar shadow-sm">
-    <img src="https://www.emilyluxton.co.uk/wp-content/uploads/2018/11/Emily-Luxton_logo-smaller.png" alt="Logo" className='logo-img' />
-    <Container>
-    <Navbar.Brand as={Link} to="/" className="d-flex align-items-center gap-2">
-    {/* <span className="brand-title">Blog Todorov</span> */}
-    </Navbar.Brand>
-    
-    <Nav className="me-auto align-items-center">
-    <Nav.Link as={Link} to="/about" style={{textTransform:"uppercase"}} className={({ isActive }) => isActive ? 'active-link' : ''}>Начало</Nav.Link>
-          <Nav.Link as={Link} to="/blog" style={{textTransform:"uppercase"}} className={location.pathname === '/blog' ? 'active-link' : ''}>Блог</Nav.Link>
+      <img src="https://www.emilyluxton.co.uk/wp-content/uploads/2018/11/Emily-Luxton_logo-smaller.png" alt="Logo" className='logo-img' />
+      <Container>
+        <Navbar.Brand as={Link} to="/" className="d-flex align-items-center gap-2">
+          {/* <span className="brand-title">Blog Todorov</span> */}
+        </Navbar.Brand>
+
+        <Nav className="me-auto align-items-center">
+          <Nav.Link as={Link} to="/about" style={{ textTransform: "uppercase" }} className={location.pathname === '/about' ? 'active-link' : ''}>Начало</Nav.Link>
+          <Nav.Link as={Link} to="/blog" style={{ textTransform: "uppercase" }} className={location.pathname === '/blog' ? 'active-link' : ''}>Блог</Nav.Link>
 
           <NavDropdown title="КАТЕГОРИИ" id="nav-dropdown" className="custom-dropdown">
             {categories.length ? (

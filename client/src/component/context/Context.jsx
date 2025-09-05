@@ -67,8 +67,6 @@ export const MyContextProvider = (props) => {
         }
     };
 
-
-
     const getByCategories = async (categoryName) => {
         try {
             const encodeCategoryName = encodeURIComponent(categoryName);

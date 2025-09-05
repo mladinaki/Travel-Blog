@@ -14,7 +14,6 @@
 .logo-img {
   height: 60px;
   width: 15%;
-  /* object-fit: contain; */
 }
 
 .nav-link {
@@ -23,11 +22,6 @@
   font-weight: 500;
   transition: 0.3s;
   font-size: 16px;
-
-}
-
-.nav-link:hover {
-  color: #027E88 !important;
 }
 
 .active-link {
@@ -36,20 +30,14 @@
 }
 
 .custom-dropdown .dropdown-menu {
-  background-color: #333;
-  border-radius: 8px;
-  padding: 0.5rem 0;
+  border-radius: 5px;
+  padding: 0;
 }
 
 .custom-dropdown .dropdown-item {
-  color: #fff !important;
-  padding: 0.5rem 1.2rem;
-  transition: 0.3s;
-}
-
-.custom-dropdown .dropdown-item:hover {
-  background-color: tomato;
-  color: #fff !important;
+  color: black !important;
+  padding: 0.4rem 1.2rem;
+  transition: 0.5s;
 }
 
 .nav-profile {
@@ -70,37 +58,42 @@
   height: 36px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid tomato;
+  border: 2px solid #027E88
 }
 
 .menu-profile {
   position: absolute;
-  top:100%;
+  top: 100%;
   right: 0;
-  background-color: #333;
+  background-color: #ffffff;
   border-radius: 8px;
   list-style: none;
   padding: 0.5rem 0;
   display: none;
   min-width: 140px;
   z-index: 999;
+  border: 2px solid #000000;
 }
 
 .profile-menu:hover .menu-profile {
   display: block;
+  padding: 10px;
+  
 }
 
 .menu-profile li {
-  padding: 0.45rem 1rem; /* повече padding, целият е кликаем */
-  color: #fff;
+  color: #000000;
   transition: 0.3s;
   cursor: pointer;
   display: flex;
-  align-items: center; /* икона + текст на една линия */
-  gap:6rem;
+  align-items: center;
+  gap: 6rem;
 }
+
 .menu-profile li:hover {
-  background-color: rgb(0, 0, 0);
+  background-color: #c2c7c7;
+  padding: 0.3rem 1rem;
+  border-radius: 5px;
 }
 
 .login-btn {
@@ -118,4 +111,9 @@
 .login-btn:hover {
   background-color: #ff6347;
   color: #fff !important;
+}
+
+.custom-dropdown .dropdown-item:hover {
+  background: #027E88;
+  color: #000000 !important;
 }
