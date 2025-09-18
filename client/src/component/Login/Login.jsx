@@ -7,8 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import UseLogin from '../HookLogin/useLogin';
 import validateForm from './ValidateLogin';
 
-const LOGIN_MODE = 'Login';
-const SIGNUP_MODE = 'Sign Up';
+const LOGIN_MODE = 'Влез';
+const SIGNUP_MODE = 'Регистрация';
 const Login = () => {
     const { url, setToken } = useContext(MyContext);
     const navigate = useNavigate();
@@ -23,12 +23,11 @@ const Login = () => {
             const response = await axios.post(endpoint, values);
             console.log(response.data);
 
-            if (response.data) {
+            if (response.data) {    
                 setToken(response.data.token);
                 localStorage.setItem('token', response.data.token);
                 localStorage.setItem('userId', response.data.user.id);
                 localStorage.setItem('username', response.data.user.username);
-
 
                 if (response.data.user && response.data.user.id) {
                     localStorage.setItem('userId', response.data.user.id);
@@ -55,15 +54,21 @@ const Login = () => {
     const { values, onChange, handleSubmit, errors, isSubmiting } = UseLogin(
         (values) => validateForm(values, loginData), onSingUp);
 
-
     const toogleFormMode = () => {
-        setLoginData((prev) => (prev === LOGIN_MODE ? SIGNUP_MODE : LOGIN_MODE))
+
+        if (loginData === LOGIN_MODE) {
+            setLoginData(SIGNUP_MODE);
+            navigate('/register');
+        } else {
+            setLoginData(LOGIN_MODE);
+            navigate('/login');
+        }
     }
 
     return (
         <div className='login-container'>
             <form onSubmit={handleSubmit}>
-                <h2>Вход</h2>
+                <h3 style={{ textAlign: "center", color: "black" }}>{loginData === LOGIN_MODE ? 'Вход' : 'Регистрация'}</h3>
                 {/* Пълно име */}
                 {loginData === SIGNUP_MODE && (
                     <div>
@@ -96,12 +101,12 @@ const Login = () => {
                     </div>
                 )}
                 {serverError && <p style={{ color: "red" }}>{serverError}</p>}
-                <Button type="submit" className='rounded-pill  m-3' variant="dark" disabled={isSubmiting}>
-                    {isSubmiting ? <Spinner animation="border" size="sm" /> : loginData === SIGNUP_MODE ? 'Create Account' : LOGIN_MODE}
+                <Button type="submit" className='btn-login  m-2' variant="dark" disabled={isSubmiting}>
+                    {isSubmiting ? <Spinner animation="border" size="sm" /> : loginData === SIGNUP_MODE ? 'Рвгистрирай се!' : LOGIN_MODE}
                 </Button>
 
-                <span onClick={toogleFormMode} className='bl' style={{ cursor: "pointer", borderBottom: "1px solid black", textAlign: "center", marginTop: "10px" }}>
-                    {loginData === LOGIN_MODE ? "Създайте тук" : "Вход"}
+                <span onClick={toogleFormMode} className='bl' style={{ cursor: "pointer", textAlign: "center", marginTop: "10px" }}>
+                    {loginData === LOGIN_MODE ? "създайте тук" : "Вече имате акаунт? Влезте тук"}.
                 </span>
 
             </form>

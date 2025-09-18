@@ -1,27 +1,11 @@
 const db = require("../config/config_db");
+const { Post, Image, Category, SubCategory, RecentPost } = require("../models");
 const path = require("path");
 const fs = require("fs");
-const Post = require("../models/Post");
-const Image = require("../models/Image");
-const Category = require("../models/Category");
-const SubCategory = require("../models/SubCategory");
 
 const { getIO } = require("../Socket/socket");
-const RecentPost = require("../models/RecentPost");
 
 require('dotenv').config();
-
-// const getCategoriesDropdown = async (req, res) => {
-//     try {
-//         const { categoryId } = req.query;
-//         const posts = await Post.findAll({
-//             where: { categoryId }
-//         });
-//         res.json(posts);
-//     } catch (error) {
-//         res.status(500).json({ error: "Грешка при зареждане на постовете." });
-//     }
-// }
 
 const getCategoriesEdit = async (req, res) => {
     try {
@@ -71,7 +55,6 @@ const addProduct = async (req, res) => {
             coverImage,
             user_id: userId
         });
-        console.log(product.categoryId);
 
         res.status(201).json({
             success: true,
@@ -90,8 +73,6 @@ const getIncrementPost = async (req, res) => {
     try {
         const { id } = req.params;
         const userId = req.user?.id;
-        console.log(userId);
-
 
         const posts = await Post.findByPk(id);
 
@@ -99,10 +80,8 @@ const getIncrementPost = async (req, res) => {
             return res.status(404).json({ message: "Product not found" });
         }
 
-
         posts.views = (posts.views || 0) + 1;
         await posts.save();
-
 
         if (userId) {
             await RecentPost.upsert({
@@ -124,7 +103,6 @@ const getIncrementPost = async (req, res) => {
             });
 
             return res.json({ message: "Views updated", views: posts.views, recentPosts: [] });
-
         }
         console.log(posts.views);
         return res.json({ message: "Views updated", views: posts.views });
@@ -148,7 +126,6 @@ const getRecentPosts = async (req, res) => {
             order: [["viewed_at", "DESC"]],
             limit: 5
         });
-        // await recentPosts.reload();
 
         return res.json({ recentPosts });
     } catch (error) {
@@ -398,7 +375,6 @@ const updatePost = async (req, res) => {
         return res.status(500).json({ error: "Вътрешна грешка на сървъра" });
     }
 };
-
 
 module.exports = {
     addProduct,

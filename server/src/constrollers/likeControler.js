@@ -1,4 +1,4 @@
-const CommentLike = require("../models/CommentLike");
+const { CommentLike } = require("../models");
 
 const likeController = async (req, res) => {
     const { comment_id } = req.params;
@@ -41,7 +41,6 @@ const countLikeController = async (req, res) => {
         const count = await CommentLike.count({
             where: { comment_id }
         });
-        
 
         res.json({ count });
     } catch (error) {

@@ -1,6 +1,5 @@
 const { Op } = require("sequelize");
-const CommentLike = require("../models/CommentLike");
-const Comment = require("../models/Comments");
+const { CommentLike, Comment } = require("../models");
 
 const likeSatatusController = async (req, res) => {
     const { post_id } = req.body;
@@ -13,7 +12,7 @@ const likeSatatusController = async (req, res) => {
         });
 
         const commentIds = comments.map(c => c.id);
-           if (!commentIds.length) return res.json({});
+        if (!commentIds.length) return res.json({});
 
         const likes = await CommentLike.findAll({
             where: { comment_id: { [Op.in]: commentIds } },

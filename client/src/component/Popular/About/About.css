@@ -1,19 +1,14 @@
-.about-row {
-    /* width: 130em; */
-    /* gap: 10px; */
-}
-
 .text-block {
-    border-radius: 10px;
-    min-height: 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  border-radius: 10px;
+  border: 1px solid silver;
 }
 
 .btn {
-    color: black;
-    background-color: white ;
-    border: 3px solid rgb(0, 0, 0);
-    font-weight: 600;
+  width: 95%;
+  margin: 0 auto;
+  position: relative;
+  justify-content: space-between;
+  display: block;
+  justify-items: center;
+  align-items: center;
 }

@@ -1,89 +1,85 @@
-.crad-container {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    justify-content: center;
-    height: 100vh;
-    overflow-y: auto;
-    padding: 10px;
-    background-color: rgb(243, 243, 243);
-
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  height: 100vh;
+  overflow: hidden;
 }
 
-.card-body img {
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+.main-content {
+    border:  1px solid #ccc;
+    width: 100%;
+  margin-left:10px;
+  flex: 1;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 20px;
+  background-color: #f8f9fa;
 }
 
-.card-body img:hover {
-    opacity: 0.7;
-    transform: scale(1.02);
+.main-content.dark-mode {
+  background-color: #1e2a1e;
+  color: #d4f1d4;
 }
 
-.btn {
-    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
-.btn:hover {
-    color: tomato;
-    transform: scale(1.05);
+.card-wrapper {
+  width: 18rem;
 }
 
-/* Стилове за бутоните */
-.edit-btn, .delete-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    transition: background 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.2s ease-in-out;
-    cursor: pointer;
-    opacity: 0;
-    animation: fadeInScale 0.5s ease-out forwards;
+.card-title {
+  color: #28a745;
+  font-weight: 600;
 }
 
-/* Леко забавяне при появяване */
-.edit-btn {
-    animation-delay: 0.2s;
+.card-text {
+  color: #333;
 }
 
-.delete-btn {
-    animation-delay: 0.4s;
+.main-content.dark-mode .card-text {
+  color: #d4f1d4;
 }
 
-/* Ефекти при hover */
-.edit-btn:hover, .delete-btn:hover {
-    background: rgba(0, 0, 0, 0.1);
-    color: red;
-    transform: scale(1.15);
+.category-item, .subcategory-item {
+  color: tomato;
+  font-weight: 500;
 }
 
-/* Ефект при натискане */
-.edit-btn:active, .delete-btn:active {
-    transform: scale(0.9);
-}
-
-/* Анимация за плавно появяване */
-@keyframes fadeInScale {
-    from {
-        opacity: 0;
-        transform: scale(0.8);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-.edit-btn i, .delete-btn i {
-    font-size: 18px;
-}
-
-/* Контейнер за бутоните в картата */
 .card-footer {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 10px;
-    margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delete-btn:hover i {
+  color: #ff4d4d;
+}
+
+.edit-btn:hover i {
+  color: #28a745;
+}
+
+.no-products {
+  width: 100%;
+  text-align: center;
+  margin-top: 50px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 80px;
+  }
+
+  .main-content {
+    margin-left: 80px;
+  }
+
+  .card-wrapper {
+    width: 100%;
+  }
 }

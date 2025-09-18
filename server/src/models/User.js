@@ -1,51 +1,46 @@
-const { DataTypes, Sequelize } = require('sequelize');
 
-const sequelize = require('../config/config_db');
-const Post = require('../models/Post');
-const Comment = require('../models/Comments');
-const User = sequelize.define('User', {
-    id: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
-        primaryKey: true
-    },
-
-    username: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-
-    email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-
-        validate: {
-            isEmail: true
+module.exports = (sequelize, DataTypes) => {
+    
+    const User = sequelize.define('User', {
+        id: {
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4,
+            primaryKey: true
         },
-        indexes: [{
+
+        username: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false,
             unique: true,
-            fields: ['email']
-        }]
-    },
+            validate: {
+                isEmail: true
+            },
+        },
 
-    password: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
+        password: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
 
-    role: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        defaultValue: "user" 
+        role: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            defaultValue: "user"
+        },
+
+        online: { type: DataTypes.BOOLEAN, defaultValue: false }
+
+    }, {
+        tableName: 'users',
+        timestamps: true
+    })
+    User.associate = (models) => {
+        User.hasMany(models.Post, { foreignKey: 'user_id' });
     }
-
-}, {
-    tableName: 'users',
-    timestamps: true
-})
-
-User.hasMany(Post, { foreignKey: 'user_id' });
-Post.belongsTo(User, { foreignKey: 'user_id' });
-
-
-module.exports = User
+    return User;
+}

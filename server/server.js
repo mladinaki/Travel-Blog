@@ -1,8 +1,10 @@
 const express = require('express');
 const userRouter = require('./src/routes/userRouter');
+const adminRouter = require('./src/routes/adminRouter');
 const productRouter = require('./src/routes/productRouter');
 const categoryRouter = require('./src/routes/categoryRouter');
 const commentRouter = require('./src/routes/commentRouter');
+const mainProfileRouter = require('./src/routes/mainProfileRouter');
 const cookieParser = require('cookie-parser');
 const syncDatabase = require('./src/config/syncDb');
 const { initializeSocket } = require('./src/Socket/socket');
@@ -21,7 +23,6 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
 
 initializeSocket(server);
 
@@ -30,10 +31,13 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.use("/users", userRouter);
-app.use("/admin", userRouter);
+app.use("/admin", adminRouter);
 app.use("/add", productRouter);
 app.use("/category", categoryRouter);
+
 app.use("/comment", commentRouter);
+app.use("/profile", mainProfileRouter);
+app.use("/mainProfile-online", mainProfileRouter);
 app.use('/uploads', express.static('uploads'));
 
 (async () => {

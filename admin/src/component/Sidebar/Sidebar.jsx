@@ -56,7 +56,7 @@ const Sidebar = () => {
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu className='mx-2'>
-                        <Dropdown.Item>
+                        <Dropdown.Item as={Link} to="/mainprofile" className='fs-6'>
                             <i className="bi bi-person me-2"></i>
                             <span>Моят профил</span>
                         </Dropdown.Item>

@@ -27,7 +27,6 @@ const UseLogin = (validate, onSubmitHandler) => {
         e.preventDefault();
         setSubmiting(true)
         
-
         // Validate form values
         const validationErrors = validate(values);
         setErrors(validationErrors);

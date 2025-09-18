@@ -35,20 +35,24 @@ export const MyContextProvider = (props) => {
 
     const mostReadView = async (id) => {
         if (!id) return;
+        if (!token) {
+            console.log('Няма токен,потребителят не е логнат');
+
+        }
         try {
-            const response = await axios.put(`${url}/add/getincrement/${id}`,{}, { headers: { token }, withCredentials: true });
+            const response = await axios.put(`${url}/add/getincrement/${id}`, {}, { headers: { token }, withCredentials: true });
             console.log(response.data);
-            
+
             const updatedViews = response.data.views;
 
             setViews(prev => ({ ...prev, [id]: updatedViews }));
 
-          if(response.data && response.data.recentPosts){
-            setRecentPosts(response.data.recentPosts);
-          }
+            if (response.data?.recentPosts) {
+                setRecentPosts(response.data.recentPosts);
+            }
 
         } catch (error) {
-           console.log("Error incrementing views:", error);
+            console.log("Error incrementing views:", error);
         }
     };
 
@@ -58,7 +62,7 @@ export const MyContextProvider = (props) => {
         try {
             const response = await axios.get(`${url}/add/getrecent/views`, { headers: { token } });
             console.log(response.data);
-            
+
             if (response.data) {
                 setRecentPosts(response.data.recentPosts);
             }

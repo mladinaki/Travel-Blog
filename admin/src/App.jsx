@@ -5,6 +5,7 @@ import Sidebars from './component/Sidebar/Sidebar';
 import { Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './component/Home/Home';
+// import Login from './component/Login/Login';
 import Allproduct from './component/Page/List/AllProduct';
 import { ToastContainer } from 'react-toastify';
 import Details from './component/Details/Details';
@@ -12,6 +13,7 @@ import Details from './component/Details/Details';
 import Edit from './component/Page/Edit/Edit';
 import AddProduct from './component/Page/Add/AddProduct';
 import { useEffect } from 'react';
+import MainProfile from './component/Page/Profile/MainProfilе';
 
 function App() {
   const url = 'http://localhost:3500';
@@ -41,10 +43,10 @@ function App() {
               <Route path='/allProduct' element={<Allproduct url={url} token={token} />} />
               <Route path='/addproduct' element={<AddProduct url={url} token={token} />} />
               <Route path='/edit/post/:id' element={<Edit url={url} token={token} />} />
+              <Route path='/mainProfile' element={<MainProfile url={url} token={token} />} />
             </Routes>
           </div>
           <Sidebars />
-
         </Fragment>
       }
     </>

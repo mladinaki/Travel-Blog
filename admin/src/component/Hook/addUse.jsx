@@ -17,7 +17,6 @@ const useAddUse = (url, token) => {
     const [postId, setPostId] = useState(null);
     const [errors, setErrors] = useState({});
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);

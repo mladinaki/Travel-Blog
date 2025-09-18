@@ -5,8 +5,9 @@
 
 }
 
-.btn {
+.btn-comment {
     color: rgb(135, 135, 135);
+    border-radius: 6px;
     background-color: #f6f6f6;
     text-transform: uppercase;
     font-weight: bolder;

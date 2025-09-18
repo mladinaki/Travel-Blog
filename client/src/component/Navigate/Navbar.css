@@ -97,20 +97,20 @@
 }
 
 .login-btn {
-  background-color: tomato;
-  color: #fff !important;
+  background-color: rgb(255, 255, 255);
+  color: #000000 !important;
   font-weight: 500;
-  border-radius: 50px;
+  border-radius: 10px;
   padding: 0.4rem 1rem;
   display: flex;
   align-items: center;
   gap: 0.3rem;
   transition: 0.3s;
+  border: 2px solid #000000;
 }
 
 .login-btn:hover {
-  background-color: #ff6347;
-  color: #fff !important;
+  background-color: #b4b4b4;
 }
 
 .custom-dropdown .dropdown-item:hover {

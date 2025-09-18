@@ -190,11 +190,7 @@ const Details = () => {
                                 }}
                             />
                         </Modal.Body>
-                        <Modal.Footer>
-                            <Button variant="secondary" style={{ fontSize: "12px" }} onClick={handleClose}>
-                                Затвори
-                            </Button>
-                        </Modal.Footer>
+
                     </Modal>
 
                     <strong style={{ color: "#027E88" }}>Добави коментар</strong>
@@ -213,7 +209,7 @@ const Details = () => {
                         const isFirst = i === 0;
                         return (
                             <div key={i} ref={isFirst ? firstComment : null}>
-                                <div className="col-md-12 mb-2 border-bottom pb-2 shadow-sm p-3 rounded-3">
+                                <div className="col-md-12 count-comment mb-2 pb-2 shadow-sm p-3 rounded-3">
                                     <div className="card-body">
                                         <div className="comment-header">
                                             <div className="text-start">

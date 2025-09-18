@@ -44,10 +44,11 @@
 
 .bnt-see-more button {
   color: black;
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 600;
   align-items: center;
   border: 2px solid #0ABAB5;
+  display: flex;
 }
 
 .bnt-see-more button:hover {

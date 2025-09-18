@@ -1,6 +1,27 @@
-.container{
+.card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.card-text {
+  font-size: 0.875rem;
+  color: #555;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  transition: 0.3s ease;
+}
+
+.btn-dark {
+  font-size: 0.875rem;
+}
+
+
+.card_cont{
+    display: block;
     position: relative;
-    top: 10px;
-    margin: 10px auto;
-    color: #f3f3f3;
+    /* width: 390px; */
+    ;
 }

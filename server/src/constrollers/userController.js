@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt");
-const User = require("../models/User");
+const { User } = require("../models");
 const generateToken = require("../Utils/utils");
 require("dotenv").config();
 
@@ -69,40 +69,11 @@ const userLogin = async (req, res) => {
     }
 }
 
-const adminLogin = async (req, res) => {
-    const { email, password } = req.body;
 
-    if (!email || !password) {
-        return res.status(400).json({ success: false, message: 'Email and Password are required!' });
-    }
-
-    try {
-        const user = await User.findOne({ where: { email } })
-
-        if (!user) {
-            return res.status(404).json({ error: 'User not found' })
-        }
-
-        if(user.role )
-
-        if (email === process.env.EMAIL_ADMIN && password === process.env.PASS_ADMIN) {
-            const token = generateToken(user)
-            res.status(200).json({ success: true, token });
-        }
-
-        else {
-            res.json({ success: false, message: 'Invalid Credentials' });
-        }
-
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ message: 'Error getting user', error: error });
-    }
-}
 
 const logout = async (req, res) => {
     res.clearCookie('token')
     res.status(200).json({ message: 'Logged out successfully' })
 }
 
-module.exports = { userRegister, userLogin, logout, adminLogin };
+module.exports = { userRegister, userLogin, logout };

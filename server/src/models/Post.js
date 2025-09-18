@@ -1,8 +1,4 @@
-    const { DataTypes } = require("sequelize");
-    const sequelize = require("../config/config_db");
-    const Category = require("./Category");
-    const User = require("./User"); // ✅ Добавен модел User
-    const SubCategory = require("./SubCategory");
+module.exports = (sequelize, DataTypes) => {
 
     const Post = sequelize.define("Post", {
         id: {
@@ -15,10 +11,12 @@
             type: DataTypes.STRING,
             allowNull: false
         },
+
         description: {
             type: DataTypes.TEXT,
             allowNull: false
         },
+
         categoryId: {
             type: DataTypes.UUID,
             allowNull: true,
@@ -39,6 +37,7 @@
             type: DataTypes.STRING,
             allowNull: false
         },
+
         user_id: {
             type: DataTypes.UUID,
             allowNull: false,
@@ -47,10 +46,12 @@
                 key: "id"
             }
         },
+
         views: {
             type: DataTypes.INTEGER,
             defaultValue: 0
         },
+
         is_verified: {
             type: DataTypes.BOOLEAN,
             defaultValue: false,
@@ -61,5 +62,13 @@
         tableName: "posts",
         timestamps: true
     });
-
-    module.exports = Post;
+    Post.associate = (models) => {
+        Post.belongsTo(models.User, { foreignKey: "user_id", onDelete: "CASCADE" });
+        Post.belongsTo(models.Category, { foreignKey: "categoryId", as: 'category' });
+        Post.belongsTo(models.SubCategory, { foreignKey: "subCategoryId", as: "subCategory" });
+        Post.hasMany(models.Image, { foreignKey: "post_id", onDelete: "CASCADE" });
+        Post.hasMany(models.RecentPost, { foreignKey: "post_id", onDelete: "CASCADE" });
+        Post.hasMany(models.Comment, { foreignKey: "post_id", onDelete: "CASCADE" });
+    }
+    return Post;
+}

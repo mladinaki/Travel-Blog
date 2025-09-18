@@ -4,21 +4,18 @@ const { getAllProducts,
     getProductId,
     addProduct,
     verifyPostAdmin,
-    deletePostId,
+
     getPostIdImages,
     getProductVerify,
     updatePost,
-    // getCategoryes,
     getIncrementPost,
     getRecentPosts,
-    getCategoriesDropdown,
-    // getCategories,
-    // getCategoriesName,
-    // getCategoriesEdit
+
 } = require('../constrollers/productController');
 
-const { authUser } = require('../middleware/authUser');
+const { authUser, authAdmin } = require('../middleware/authUser');
 const upload = require('../Utils/multerUpload');
+const deletePostId = require('../constrollers/deltePostController');
 
 const router = express.Router();
 
@@ -32,10 +29,5 @@ router.delete('/remove/post/:id', deletePostId);
 router.put('/edit/post/:id', upload.single('coverImage'), updatePost);
 router.put('/getincrement/:id', authUser, getIncrementPost);
 router.get('/getrecent/views', authUser, getRecentPosts);
-// router.get('/posts', authUser, getCategoriesDropdown);
-
-// router.get('/posts/category/:categoryName', getCategories);
-// router.get('/categories', getCategoriesName);
-// router.get('/categoriesEdit', getCategoriesEdit);
 
 module.exports = router;

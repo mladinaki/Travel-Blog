@@ -1,6 +1,6 @@
 const { v4: uuidv4 } = require('uuid');
-const Comment = require("../models/Comments");
-const User = require('../models/User');
+
+const {Comment, User} = require("../models");
 
 const addComment = async (req, res) => {
     try {
@@ -40,8 +40,8 @@ const getCommentId = async (req, res) => {
             include: [
                 {
                     model: User,
-                    as: 'user',
-                    attributes: ['username']
+                    as: 'author',
+                    attributes: ['id','username','email']
                 },
             ],
         });

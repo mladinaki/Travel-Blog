@@ -68,7 +68,7 @@ const Comment = ({ postId, userId, onCommentAdded }) => {
                     required
                     style={{ width: '100%', minHeight: '100px',border:"1px solid silver", fontSize: 16, fontFamily: "arial",borderRadius:5 }}
                 />
-                <button type="submit" className="btn mt-2" >Kоментирай</button>
+                <button type="submit" className="btn-comment mt-2" >Kоментирай</button>
             </form>
         </div>
     );

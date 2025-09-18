@@ -17,6 +17,7 @@ const AddProduct = ({ url, token }) => {
         setCoverImage,
         imageUrl,
         setSubCategory,
+        setImageUrl,
         setDescriptions,
         loading,
         serverError,
@@ -67,7 +68,7 @@ const AddProduct = ({ url, token }) => {
                                 />
 
                             ) : (
-                                <i className="bi bi-cloud-upload" style={{ color: "#2d2d2d", fontSize: "3rem" }}></i>
+                                <i className="bi bi-cloud-upload" style={{ color: "#2d2d2d", fontSize: "1rem" }}></i>
                             )}
                         </label>
 
@@ -95,15 +96,32 @@ const AddProduct = ({ url, token }) => {
                                 <div className="col-body upload-img">
                                     {imageUrl && imageUrl.length > 0 ? (
                                         imageUrl.map((image, index) => (
-                                            <img key={`${image.name}=${index}`}
-                                                style={{ width: "100px" }}
-                                                src={URL.createObjectURL(image)}
-                                                alt={`Preview ${index + 1}`} />
+                                            <div key={`${image.name}=${index}`} style={{ position: "relative", display: "inline-block", marginRight: "3px" }}>
+                                                <img
+                                                    style={{ width: "100px" }}
+                                                    src={URL.createObjectURL(image)}
+                                                    alt={`Preview ${index + 1}`} />
+                                                <button style={{
+                                                    position: "absolute",
+                                                    top: -5,
+                                                    right: 0,
+                                                    background: "red",
+                                                    color: "white",
+                                                    backgroundColor:"black",
+                                                    border: "none",
+                                                    borderRadius: "50%",
+                                                    width: "20px",
+                                                    height: "20px",
+                                                    cursor: "pointer"
+                                                }} type='button' onClick={() => {
+                                                    setImageUrl(prev => prev.filter((_, i) => i !== index))
+                                                }}><p style={{ position: "relative", bottom: 10, right: 3 }}>&times;</p></button>
+                                            </div>
                                         ))
                                     ) : (
                                         <i className="bi bi-cloud-upload" style={{ color: "#2d2d2d", fontSize: "3rem" }}></i>
                                     )}
-                                    <small className="form-text text-muted">
+                                    <small className="form-text" style={{ display: 'flex', marginTop: 20 }} >
                                         Можете да изберете няколко изображения едновременно.
                                     </small>
                                 </div>

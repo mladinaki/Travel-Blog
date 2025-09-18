@@ -15,14 +15,14 @@ const Login = ({ url, setToken }) => {
         e.preventDefault();
 
         try {
-            if (!email || !password) {
+            if (!email || !password) {  
                 return alert('Полетата са задължителни!');
             }
 
-            const response = await axios.post(`${url}/users/admin`, { email, password });
+            const response = await axios.post(`${url}/admin/login`, { email, password });
+            console.log(response.data);
 
             if (response) {
-
                 setToken(response.data.token);
                 localStorage.setItem('token', response.data.token);
 
@@ -34,9 +34,6 @@ const Login = ({ url, setToken }) => {
                 } else {
                     console.error("User data is missing from response:", response.data);
                 }
-
-
-                localStorage.setItem('userId', response.data.user.id);
                 window.location.replace('/allproduct');
             }
 

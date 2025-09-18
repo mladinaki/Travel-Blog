@@ -1,4 +1,3 @@
-
 body {
   font-family: 'MyCustomFont', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
@@ -6,12 +5,15 @@ body {
 /*Основен стил за Sidebar */
 .sidebar-container {
   display: flex;
+  height: 100vh;
+  /* пълна височина на екрана */
+  overflow: hidden;
 }
 
 .sidebar {
-  width: 250px;
+   width: 250px;
   min-height: 100vh;
-  background-color: #343a40;
+  background-color: #343a40; /* тъмно сиво */
   transition: width 0.3s ease-in-out;
   padding: 10px;
 }
@@ -20,27 +22,65 @@ body {
   width: 80px;
 }
 
-/*Стил на бутона "Start Menu" */
-.toggle-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 50px;
+/* Main content (карти с постове) */
+.main-content {
+  flex-grow: 1;           /* заема остатъчното пространство */
+  overflow-y: auto;       /* вертикално скролиране */
+  padding: 20px;
+  background-color: #f8f9fa; /* светъл фон по подразбиране */
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Тъмна зелена тема */
+.main-content.dark-mode {
+  background-color: #0f2f1f; /* тъмнозелен фон */
+  color: #d1f0c0;            /* светло зелен текст */
+}
+
+/* Карти */
+.crad-container .row .row .row .p-2 {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 15px;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.main-content.dark-mode .crad-container .row .row .row .p-2 {
+  background-color: #1b3d2b; /* по-тъмен зелен за картите */
+  color: #d1f0c0;
+}
+
+/* Бутони */
+button {
+  margin-bottom: 15px;
+}
+
+button.toggle-theme {
+  background-color: #198754;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
 }
 
-/* Активен елемент в навигацията */
-.nav-item .active {
-  background-color: tomato;
-  color: white;
-  border-left: 4px solid orange;
-  padding-left: 12px;
+button.toggle-theme:hover {
+  background-color: #145c3b;
 }
 
-.sidebar-menu{
-  font-size: 25px;
+/* Category / subcategory spans */
+.category-item,
+.subcategory-item {
+  color: tomato;
 }
+
+/* Картите на постовете */
+.card-body h3,
+.card-body p {
+  color: inherit; /* цветът следва main-content или dark-mode */
+}
+
 /*ОПТИМИЗАЦИЯ ЗА МОБИЛНИ */
 @media (max-width: 768px) {
   .sidebar {

@@ -24,6 +24,7 @@ function App() {
           <Route path='/details/:id' element={<Details />} />
           <Route path='/category/:categoryName' element={<Category />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Login />} />
           <Route path='/blog' element={<Home />} />
         </Routes>
       </MyContextProvider>

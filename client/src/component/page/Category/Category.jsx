@@ -1,53 +1,50 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import React, { useContext, useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import MyContext from '../../context/Context';
-import { Link } from 'react-router-dom';
+import './Category.css';
 
 const Category = () => {
   const { categoryName } = useParams();
-  const { url, getByCategories, postsByCategory } = useContext(MyContext)
+  const { url, getByCategories, postsByCategory } = useContext(MyContext);
 
   useEffect(() => {
     getByCategories(categoryName);
   }, [categoryName, getByCategories]);
 
-  const posts = postsByCategory[categoryName] || []
+  const posts = postsByCategory[categoryName] || [];
 
   return (
-    <div className="container mt-5">
-      <h2 className="text-center fs-5 mb-2 p-4" style={{ marginTop: "5rem" }}>Публикации в категория: <span style={{
-        color: "red",
-        fontWeight: "bolder",
-        fontSize: "17px",
-        letterSpacing: 2
-      }}>{categoryName}</span></h2>
+    <div className="container py-5 ">
+      <h2 className="text-center mb-3 fs-5 mt-3 p-3">
+        Публикации в категория: <span className="text-danger fw-bold">{categoryName}</span>
+      </h2>
 
-      <div className="row justify-content-center">
+      <div className="row g-0">
         {posts.length > 0 ? (
           posts.map(post => (
-            <div key={post.id} className="col-md-4 mb-4">
-              <div className="card shadow-sm h-100">
+            <div key={post.id} className="col-6 col-md-3 mb-3">
+              <div className="card card_cont shadow-sm border-0 rounded-3 overflow-hidden">
                 <img
                   src={url + '/uploads/' + post.coverImage}
                   alt={post.title}
                   className="card-img-top"
-                  style={{ height: "200px", objectFit: "cover" }}
+                  style={{ height: "180px", objectFit: "cover" }}
                 />
                 <div className="card-body d-flex flex-column">
                   <h5 className="card-title">{post.title}</h5>
-                  <p className="card-text text">{post.description.slice(0, 100)}[...]</p>
-                  <Link to={`/details/${post.id}`} className="btn btn-dark mt-auto">Прочети повече</Link>
+                  <p className="card-text flex-grow-1">{post.description.slice(0, 100)}...</p>
+                  <Link to={`/details/${post.id}`} className="btn btn-dark mt-2">
+                    Прочети повече
+                  </Link>
                 </div>
               </div>
             </div>
           ))
         ) : (
-          <p className="text-center">Няма публикации в тази категория.</p>
+          <p className="text-center w-100">Няма публикации в тази категория.</p>
         )}
       </div>
     </div>
-
   );
 };
 

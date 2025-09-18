@@ -1,14 +1,13 @@
-const db = require('../config/config_db');
+const db = require('../models');
+const sequelize = db.sequelize;
 
-require("../models/associations");
-
-async function syncDatabase() {
+const syncDatabase = async () => {
     try {
         if (process.env.NODE_ENV === "development") {
             await sequelize.sync({ alter: true });
             console.log("Database synchronized successfully (alter).");
         } else {
-            await db.authenticate();
+            await sequelize.authenticate();
             console.log("Database connection established.");
         }
     } catch (error) {

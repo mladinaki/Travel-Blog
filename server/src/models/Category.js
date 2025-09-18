@@ -1,21 +1,25 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("../config/config_db");
+module.exports = (sequelize, DataTypes) => {
 
-const Category = sequelize.define("Category", {
-  id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
-    primaryKey: true,
-  },
+  const Category = sequelize.define("Category", {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+    },
 
-  categoryName: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
- 
-}, {
-  tableName: 'categories',
-  timestamps: true,
-});
+    categoryName: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
 
-module.exports = Category;
+  }, {
+    tableName: 'categories',
+    timestamps: true
+  })
+  Category.associate = (models) => {
+    Category.hasMany(models.SubCategory, { foreignKey: "categoryId", onDelete: "CASCADE" });
+    Category.hasMany(models.Post, { foreignKey: "categoryId", onDelete: "CASCADE" });
+  }
+  return Category;
+}
+
