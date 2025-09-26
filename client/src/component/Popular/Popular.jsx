@@ -5,7 +5,6 @@ import Mostread from '../Mostread/Mostread';
 import { Link, useParams } from 'react-router-dom';
 import { assets } from '../../assets/assets';
 import './Popular.css';
-import { useEffect } from 'react';
 
 const Popular = () => {
     const { id } = useParams();
@@ -54,7 +53,7 @@ const Popular = () => {
                                 </div>
                                 <div className="text-start ps-2">
                                     <i className="bi bi-calendar2-plus me-1" style={{ color: "#0ABAB5" }}></i>
-                                    <span style={{   color: "#027E88", fontSize: "11px", marginRight: "10px" }}>
+                                    <span style={{ color: "#027E88", fontSize: "11px", marginRight: "10px" }}>
                                         {new Date(product.createdAt).toLocaleDateString('bg-BG', {
                                             day: '2-digit',
                                             month: '2-digit',
@@ -62,7 +61,7 @@ const Popular = () => {
                                         }).replace(/\//g, '.')}
                                     </span>
                                     <i className="bi bi-eye"></i>
-                                    <span className='m-1' style={{ fontSize: "13px",   color: "#027E88 "}}>
+                                    <span className='m-1' style={{ fontSize: "13px", color: "#027E88 " }}>
                                         {views[product.id] ?? product.views} гледания
                                     </span>
                                 </div>
@@ -74,8 +73,17 @@ const Popular = () => {
                                 <div className=" p-2 bnt-see-more">
                                     <Link to={`/details/${product.id}`}>
 
-                                        <button className="btn fas fa-long-arrow-alt-right">
-                                            Прочети повече<i class="bi bi-arrow-right"></i>
+                                        <button style={{
+                                            width: "121px",
+                                            height: "28px",
+                                            backgroundColor: "#583737",
+                                            color: "#FFFFFF",
+                                            borderRadius: "6px",
+                                            fontFamily: "NewsCycle, sans-serif",
+                                            fontWeight: "700",
+                                            fontSize: "10px"
+                                        }} className="btn fas fa-long-arrow-alt-right" >
+                                            Прочети повече<i className="bi bi-arrow-right"></i>
                                         </button>
                                     </Link>
                                 </div>

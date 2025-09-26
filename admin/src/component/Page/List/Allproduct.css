@@ -1,8 +1,14 @@
 body {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   height: 100vh;
   overflow: hidden;
+}
+
+
+
+/* Пример за използване */
+body {
+  font-family: 'DroidSerif-Bolditakic', sans-serif;
 }
 
 .main-content {

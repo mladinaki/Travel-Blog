@@ -104,7 +104,6 @@ const getIncrementPost = async (req, res) => {
 
             return res.json({ message: "Views updated", views: posts.views, recentPosts: [] });
         }
-        console.log(posts.views);
         return res.json({ message: "Views updated", views: posts.views });
 
     } catch (error) {
@@ -198,7 +197,7 @@ const getProductId = async (req, res) => {
     try {
         const postDetails = await Post.findOne({
             where: { id: postId },
-            attributes: ['title', 'coverImage', 'description', 'categoryId', 'subCategoryId'],
+            attributes: ['id', 'title', 'coverImage', 'description', 'categoryId', 'subCategoryId'],
             include: [
                 { model: Category, as: 'category', attributes: ['id', 'categoryName'] },
                 { model: SubCategory, as: 'subCategory', attributes: ['id', 'subCategoryName'] }
@@ -211,7 +210,7 @@ const getProductId = async (req, res) => {
 
         const imageDetails = await Image.findAll({
             where: { post_id: postId },
-            attributes: ['image_url', 'descriptions']
+            attributes: ['id','image_url', 'descriptions']
         });
 
         res.json({

@@ -18,7 +18,6 @@ const addComment = async (req, res) => {
             username: username,
             text: text,
         });
-        console.log(newComment);
         return res.status(201).json({
             success: true,
             message: "Коментарът е добавен успешно!",
