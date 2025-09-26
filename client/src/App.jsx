@@ -11,13 +11,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import About from './component/Popular/About/About';
 import NavigateBar from './component/Navigate/NavigateBar';
-
+import TestComponent from './component/context/TestComponent';
 
 function App() {
   return (
     <div>
       <MyContextProvider>
-        <NavigateBar/>
+        {/* <TestComponent /> */}
+        <NavigateBar />
         <ToastContainer />
         <Routes>
           <Route path='/about' element={<About />} />

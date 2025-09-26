@@ -3,6 +3,9 @@ import { createContext, useEffect, useRef, useState } from "react";
 import { lists_menu } from "../../assets/assets";
 import { io } from "socket.io-client";
 import { toast } from 'react-toastify';
+import { useReducer } from "react";
+import inialStateFunc from "./initialState";
+import { myReducer } from "./MyReducer";
 
 export const MyContext = createContext();
 export const MyContextProvider = (props) => {
@@ -10,23 +13,18 @@ export const MyContextProvider = (props) => {
     const socketRef = useRef(null);
     let url = 'http://localhost:3500';
 
-    const [token, setToken] = useState(() => localStorage.getItem('token') || '');
-    const [all_product, setAllProduct] = useState([]);
-    const [recentPosts, setRecentPosts] = useState([]);
-    const [views, setViews] = useState({})
     const [postsByCategory, setPostsByCategory] = useState({});
     const [categories, setCategories] = useState([]);
-    const [comments, setComments] = useState([]);
-    const [post, setPost] = useState(null);
-    const [images, setImages] = useState([]);
     const [isUserLogedIn, setUsertLogetIn] = useState(false);
 
+    const [state, dispatch] = useReducer(myReducer, {}, inialStateFunc);
+
     const getAllProduct = async (props) => {
-        const config = token ? { headers: { token } } : {};
+        const config = state.token ? { headers: { token: state.token } } : {};
         try {
             const response = await axios.get(url + `/add/get`, config);
             if (response.data.success || Array.isArray(response.data)) {
-                setAllProduct(response.data);
+                dispatch({ type: 'SET_ALL_PRODUCTS', payload: response.data });
             }
         } catch (error) {
             console.error("Error fetching products:", error);
@@ -35,20 +33,16 @@ export const MyContextProvider = (props) => {
 
     const mostReadView = async (id) => {
         if (!id) return;
-        if (!token) {
+        if (!state.token) {
             console.log('Няма токен,потребителят не е логнат');
-
         }
         try {
-            const response = await axios.put(`${url}/add/getincrement/${id}`, {}, { headers: { token }, withCredentials: true });
-            console.log(response.data);
+            const response = await axios.put(`${url}/add/getincrement/${id}`, {}, { headers: { token: state.token }, withCredentials: true });
 
-            const updatedViews = response.data.views;
-
-            setViews(prev => ({ ...prev, [id]: updatedViews }));
+            dispatch({ type: 'SET_VIEWS', payload: { id, views: response.data.views } });
 
             if (response.data?.recentPosts) {
-                setRecentPosts(response.data.recentPosts);
+                dispatch({ type: 'SET_RECENT_POSTS', payload: response.data.recentPosts });
             }
 
         } catch (error) {
@@ -57,14 +51,12 @@ export const MyContextProvider = (props) => {
     };
 
     const getRecentPosts = async () => {
-        if (!token) return;
+        if (!state.token) return;
 
         try {
-            const response = await axios.get(`${url}/add/getrecent/views`, { headers: { token } });
-            console.log(response.data);
-
+            const response = await axios.get(`${url}/add/getrecent/views`, { headers: { token: state.token } });
             if (response.data) {
-                setRecentPosts(response.data.recentPosts);
+                dispatch({ type: 'SET_RECENT_POSTS', payload: response.data.recentPosts });
             }
         } catch (error) {
             console.log(error);
@@ -81,16 +73,14 @@ export const MyContextProvider = (props) => {
                 [categoryName]: response.data,
             }));
         } catch (error) {
-            console.error("Грешка при зареждане на постовете:", error);
+            console.log("Грешка при зареждане на категориите", error);
         }
     };
 
     const fetchComments = async (id) => {
-        console.log(id);
-
         try {
-            const response = await axios.get(url + `/comment/addComment/${id}`, { headers: { token } });
-            setComments(response.data.comments);
+            const response = await axios.get(url + `/comment/addComment/${id}`, { headers: { token: state.token } });
+            dispatch({ type: 'SET_COMMENTS', payload: response.data.comments });
         } catch (error) {
             console.error("Грешка при зареждане на коментарите:", error);
         }
@@ -116,7 +106,7 @@ export const MyContextProvider = (props) => {
                 user_id: userId,
                 text,
                 username
-            }, { headers: { token } });
+            }, { headers: { token: state.token } });
 
             if (response.data.success) {
                 toast.success("Коментарът е добавен успешно!");
@@ -137,21 +127,15 @@ export const MyContextProvider = (props) => {
         if (!id) return;
 
         try {
-            const response = await axios.get(`${url}/add/get/${id}`, { headers: { token } });
+            const response = await axios.get(`${url}/add/get/${id}`, { headers: { token: state.token } });
             const { postDetails, imageDetails } = response.data;
-            setPost(postDetails);
-            if (Array.isArray(imageDetails)) {
-                setImages(imageDetails);
-            } else if (imageDetails) {
-                setImages([imageDetails]);
-            } else {
-                setImages([]);
+            if (response.data) {
+                dispatch({ type: 'SET_POST', payload: { post: postDetails, images: imageDetails } })
             }
 
-            if (token) {
-                setUsertLogetIn(true)
+            if (state.token) {
+                dispatch({ type: 'SET_USER_LOGGED_IN', payload: true });
             }
-            setImages(Array.isArray(imageDetails) ? imageDetails : []);
         } catch (error) {
             console.log(error.message);
         }
@@ -160,13 +144,13 @@ export const MyContextProvider = (props) => {
     useEffect(() => {
         const savedToken = localStorage.getItem('token');
         if (savedToken) {
-            setToken(savedToken);
+            dispatch({ type: 'SET_TOKEN', payload: savedToken });
         }
         getAllProduct();
     }, []);
 
     useEffect(() => {
-        if (!token) return;
+        if (!state.token) return;
 
         const socket = io(url, {
             transports: ['websocket'],
@@ -176,15 +160,12 @@ export const MyContextProvider = (props) => {
         getRecentPosts();
 
         socket.on("newPost", (post) => {
-            setAllProduct((prevPosts) => [...prevPosts, post]);
+            dispatch({ type: "ADD_PRODUCT", payload: post })
         });
 
         socket.on("update", (updatedPost) => {
-            setAllProduct((prevPosts) =>
-                prevPosts.map((p) =>
-                    p.id === updatedPost.id ? { ...p, is_verified: updatedPost.is_verified } : p
-                )
-            );
+            dispatch({ type: "UPDATE_PRODUCT", payload: updatedPost });
+
             setTimeout(() => {
                 getAllProduct();
             }, 500);
@@ -197,30 +178,24 @@ export const MyContextProvider = (props) => {
         return () => {
             socket.disconnect();
         };
-    }, [token]);
+    }, [state.token]);
 
     const contextValue = {
+        ...state,
+        dispatch,
         lists_menu,
         url,
-        all_product,
-        recentPosts,
         postsByCategory,
         getByCategories,
         fetchComments,
-        comments,
         commentSubmited,
         getRecentPosts,
-        views,
         mostReadView,
-        setAllProduct,
         getAllProduct,
         fetchCategory,
         categories,
-        setRecentPosts,
-        token,
-        setToken,
-        post,
-        images,
+        post: state.post,
+        images: state.images,
         getListId, isUserLogedIn
     }
     return (
